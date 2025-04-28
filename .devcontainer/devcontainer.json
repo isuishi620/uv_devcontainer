@@ -28,6 +28,5 @@
             ]
         }
     },
-    "postStartCommand": "uv init || echo 'uv init failed'",
-    "postAttachCommand": "uv sync || echo 'uv sync failed'"
+    "postStartCommand": "sudo chown -R vscode:vscode ${containerWorkspaceFolder} && bash .devcontainer/setup.sh"
 }
