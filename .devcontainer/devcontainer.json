@@ -1,0 +1,33 @@
+{
+    "name": "${containerWorkspaceFolderBasename}",
+    "build": {
+        "context": ".",
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {}
+    },
+    "containerEnv": {
+        "TZ": "Asia/Tokyo"
+    },
+    "forwardPorts": [8888],
+    "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.defaultInterpreterPath": "/workspaces/${containerWorkspaceFolderBasename}/.venv/bin/python",
+                "python.analysis.exclude": [
+                    "**/data",
+                    "**/.venv"
+            ]
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter"
+            ]
+        }
+    },
+    "postStartCommand": "uv init || echo 'uv init failed'",
+    "postAttachCommand": "uv sync || echo 'uv sync failed'"
+}
